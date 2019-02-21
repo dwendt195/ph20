@@ -3,9 +3,15 @@ import numpy as np
 from numpy.linalg import inv
 import matplotlib.pyplot as plt
 
+x0=float(sys.argv[1])
+v0=float(sys.argv[2])
+n=int(sys.argv[3])
+h=float(sys.argv[4])
+name=sys.argv[5]
+
 #mass on a spring: d2x/dt2=-k/m x
 
-def euler(x0,v0,n,h,fig):
+def euler(x0,v0,n,h,name):
     t = np.zeros(n)
     x = np.zeros(n)
     v = np.zeros(n)
@@ -15,9 +21,11 @@ def euler(x0,v0,n,h,fig):
         t[i+1]=h*(i+1)
         v[i+1]=v[i]-h*x[i]
         x[i+1]=x[i]+h*v[i]
-    fig=plt.plot(t,x,label='Position (x)')
-    fig=plt.plot(t,v,label='Velocity (v)')
-    
+    fig=plt.figure()
+    plt.plot(t,x,label='Position (x)')
+    plt.plot(t,v,label='Velocity (v)')
+    fig.savefig(name)
+   
 def eulererror(x0,v0,n,h,ax):
     t = np.zeros(n)
     x = np.zeros(n)
@@ -140,3 +148,5 @@ def eulerenergysymp(x0,v0,n,h,fig):
         v[i+1]=v[i]-h*x[i+1]
     E = x*x+v*v
     fig=plt.plot(t,E,label='Symplectic')
+
+euler(x0,v0,n,h,name)
