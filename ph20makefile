@@ -1,0 +1,3 @@
+out.txt :
+	source activate ph20ass1
+	jupyternotebook
