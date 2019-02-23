@@ -1,3 +1,8 @@
-out.txt :
-	source activate ph20ass1
-	jupyternotebook
+.PHONY : outs
+outs : out1.pdf out2.pdf
+
+out1.pdf :
+	python ph20numint2.py 1 0 100 0.01 out1.pdf
+	
+out2.pdf :
+	python ph20numint2.py 1 0 1000 0.001 out2.pdf

@@ -150,3 +150,4 @@ def eulerenergysymp(x0,v0,n,h,fig):
     fig=plt.plot(t,E,label='Symplectic')
 
 euler(x0,v0,n,h,name)
+
