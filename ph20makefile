@@ -1,8 +1,12 @@
 .PHONY : outs
 outs : out1.pdf out2.pdf
 
-out1.pdf :
-	python ph20numint2.py 1 0 100 0.01 out1.pdf
+out1.pdf : ph20numint2.py
+	python $^ 1 0 100 0.01 $@ euler
 	
-out2.pdf :
-	python ph20numint2.py 1 0 1000 0.001 out2.pdf
+out2.pdf : ph20numint2.py
+	python $^ 1 0 1000 0.001 $@ euler
+
+.PHONY : clean
+clean :
+	rm -f *.pdf

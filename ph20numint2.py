@@ -8,6 +8,7 @@ v0=float(sys.argv[2])
 n=int(sys.argv[3])
 h=float(sys.argv[4])
 name=sys.argv[5]
+func=sys.argv[6]
 
 #mass on a spring: d2x/dt2=-k/m x
 
@@ -24,9 +25,13 @@ def euler(x0,v0,n,h,name):
     fig=plt.figure()
     plt.plot(t,x,label='Position (x)')
     plt.plot(t,v,label='Velocity (v)')
-    fig.savefig(name)
+    plt.xlabel('Time (s)')
+    plt.ylabel('Position and Velocity')
+    plt.title('Explicit Euler approximation of spring motion')
+    plt.legend(loc=4)
+    fig.savefig(name,bbox_inches='tight')
    
-def eulererror(x0,v0,n,h,ax):
+def eulererror(x0,v0,n,h,name):
     t = np.zeros(n)
     x = np.zeros(n)
     v = np.zeros(n)
@@ -39,8 +44,18 @@ def eulererror(x0,v0,n,h,ax):
     xerr=np.cos(t)-x
     verr=-np.sin(t)-v
     
+    fig, ax = plt.subplots(2, constrained_layout=True)
     ax[0].plot(t,xerr,label='h = '+str(h))
     ax[1].plot(t,verr,label='h = '+str(h))
+    ax[0].set_xlabel('Time (s)')
+    ax[1].set_xlabel('Time (s)')
+    ax[0].set_ylabel('Error in x (m)')
+    ax[1].set_ylabel('Error in v (m/s)')
+    ax[0].set_title('Error in simulated position (explicit)')
+    ax[1].set_title('Error in simulated velocity (explicit)')
+    ax[0].legend(loc=4)
+    ax[1].legend(loc=4)
+    fig.savefig(name,bbox_inches='tight')
     
 def eulerenergy(x0,v0,n,h,fig):
     t = np.zeros(n)
@@ -149,5 +164,6 @@ def eulerenergysymp(x0,v0,n,h,fig):
     E = x*x+v*v
     fig=plt.plot(t,E,label='Symplectic')
 
-euler(x0,v0,n,h,name)
+if(func=="euler"):
+    euler(x0,v0,n,h,name)
 
