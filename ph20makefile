@@ -7,6 +7,9 @@ out1.pdf : ph20numint2.py
 out2.pdf : ph20numint2.py
 	python $^ 1 0 1000 0.001 $@ euler
 
+test.pdf : test.tex out1.pdf
+	pdflatex $<
+
 .PHONY : clean
 clean :
 	rm -f *.pdf
