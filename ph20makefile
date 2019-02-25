@@ -1,14 +1,11 @@
-.PHONY : outs
-outs : out1.pdf out2.pdf
-
-out1.pdf : ph20numint2.py
-	python $^ 1 0 100 0.01 $@ euler
-	
-out2.pdf : ph20numint2.py
-	python $^ 1 0 1000 0.001 $@ euler
-
-test.pdf : test.tex out1.pdf
+wendt-assignment3.pdf : wendt-assignment3.tex outs
 	pdflatex $<
+
+.PHONY : outs
+outs : eulerexplicit.pdf eulerexpliciterror.pdf eulerexplicitenergy.pdf eulerimplicit.pdf eulerimpliciterror.pdf eulerimplicitenergy.pdf eulerphasespace.pdf eulerphasesymp.pdf eulersymplecticenergy.pdf
+
+eulerexplicit.pdf eulerexpliciterror.pdf eulerexplicitenergy.pdf eulerimplicit.pdf eulerimpliciterror.pdf eulerimplicitenergy.pdf eulerphasespace.pdf eulerphasesymp.pdf eulersymplecticenergy.pdf : ph20numint2.py
+	python $^ 
 
 .PHONY : clean
 clean :
