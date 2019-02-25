@@ -1,12 +1,31 @@
 \documentclass{article}
-\title{Numerical Model of Simple Harmonic Oscillator}
+\title{Using Makefiles and Version Control to Build Assignment}
 \author{Daniel Wendt}
 
-\usepackage{amsmath,amsthm,amssymb,graphicx,siunitx,float}
+\usepackage{amsmath,amsthm,amssymb,graphicx,siunitx,float,listings,fullpage}
 
 \begin{document}
 
 \maketitle
+
+\section{Makefiles and Version Control}
+
+I used the makefile ``ph20makefile'' to build this pdf document, calling the code from the previous assignment to create the required plots and using the pdflatex command. The makefile also access and saves the git log recorded in this document. The text of this makefile is included below:
+
+\subsection*{ph20makefile}
+\texttt{\lstinputlisting[breaklines]{ph20makefile}}
+
+Additionally, git was used to version control this assignment during the process of creating a makefile and modifying the code from the previous assignment. The version control log shows the process of changes, including my detour into making the code take command line input, and then deciding it was too hard to figure out how to plot multiple plots. Fortunately, the progress I made on this is saved using version control, so I may return to it someday. 
+
+\subsection*{git log}
+\texttt{\lstinputlisting[breaklines]{textgitlog.txt}}
+
+The python source code used is represented below. This program defines functions to create plots of different types of simulations of a harmonic oscillator, which are then called to plot and save the figures used in the second part of this assignment.
+
+\subsection*{ph20numint2.py}
+\texttt{\lstinputlisting[breaklines]{ph20numint2.py}}
+
+\section{Numerical Model of Simple Harmonic Oscillator}
 
 Numerical methods can be used to integrate and model systems involving differential equations, such as a simple harmonic oscillator like a mass on a spring. This system is described by Newton's second law and the spring equation: $$F=m\frac{d^2x}{dt^2}=-kx.$$ Using the explicit form of Euler's method of integrating differential equations, for a spring with mass and spring constant chosen so that $k=m$, we can derive $$x_{i+1}=x_i+hv_i,\quad v_{i+1}=v_i-hx_i.$$ I wrote a Python function to find the position and velocity of a spring over time given the input initial position and velocity, the number of points $N$ at which to find the value, and the interval $h$ between points. Figure \ref{eulerexplicit} shows the simulated approximation of position and velocity over time calculated for $x_0=1,v_0=0,N=4000,$ and $h=0.01$. This shows several cycles, demonstrating that the error inherent to this approximation causes the calculated amplitude of the oscillation to increase over time. 
 
@@ -75,7 +94,7 @@ Another method of approximating, the symplectic Euler method, conserves energy o
 	\centering
 	\includegraphics[width=0.6\textwidth]{eulerphasesymp.pdf}
 	\caption{A plot showing the phase-space geometry of the symplectic and explicit Euler approximations, and the expected analytic solution. Each approximation has $x$ plotted against $v$. While the explicit solution spirals outward, the symplectic solution remains close to the analytic solution, but slightly out of phase.}
-	\label{phasespace}
+	\label{phasesymp}
 \end{figure}
 
 The error in the phase of this approximation shows up in the average energy calculated by the symplectic Euler method. The normalized total energy, calculated like with the previous approximations, is plotted in Figure \ref{sympenergy}. Unlike the explicit and implicit Euler methods, the symplectic energy is sinusoidal, oscillating around the expected central value of 1. This corresponds to the phase-space diagram, where the symplectic approximation deviated slightly from the circle of $x^2+v^2=E$, repeatedly cycling between lower and higher. 

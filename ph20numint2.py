@@ -4,7 +4,6 @@ from numpy.linalg import inv
 import matplotlib.pyplot as plt
 
 #mass on a spring: d2x/dt2=-k/m x
-#this comment added for the sake of git :^)
 
 def euler(x0,v0,n,h,fig):
     t = np.zeros(n)

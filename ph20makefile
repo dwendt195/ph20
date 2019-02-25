@@ -1,5 +1,8 @@
-wendt-assignment3.pdf : wendt-assignment3.tex outs
+wendt-assignment3.pdf : wendt-assignment3.tex outs textgitlog.txt
 	pdflatex $<
+    
+textgitlog.txt : 
+	git log --oneline > textgitlog.txt
 
 .PHONY : outs
 outs : eulerexplicit.pdf eulerexpliciterror.pdf eulerexplicitenergy.pdf eulerimplicit.pdf eulerimpliciterror.pdf eulerimplicitenergy.pdf eulerphasespace.pdf eulerphasesymp.pdf eulersymplecticenergy.pdf
