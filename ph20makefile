@@ -1,7 +1,9 @@
 wendt-assignment3.pdf : wendt-assignment3.tex outs textgitlog.txt
 	pdflatex $<
+
+.PHONY : gitlog
     
-textgitlog.txt : 
+textgitlog.txt : gitlog
 	git log --oneline > textgitlog.txt
 
 .PHONY : outs
